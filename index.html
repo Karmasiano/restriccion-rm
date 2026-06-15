@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Restricción de carga · sello verde · RM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-top:#141821; --bg-bot:#1F2531;
+    --surface:rgba(255,255,255,.045); --line:rgba(255,255,255,.09);
+    --txt:#ECEFF4; --muted:#959EAD;
+    --clear:#36B7A3; --pre:#E3A53C; --emer:#E25A41;
+    --accent:var(--clear);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Inter,system-ui,sans-serif;color:var(--txt);
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(227,165,60,.10), transparent 60%),
+      linear-gradient(180deg,var(--bg-top),var(--bg-bot));
+    min-height:100vh;line-height:1.5;
+    padding:28px 18px 48px;
+  }
+  .wrap{max-width:600px;margin:0 auto}
+
+  /* cordillera silhouette */
+  .ridge{position:fixed;left:0;right:0;bottom:0;height:140px;opacity:.5;z-index:0;
+    background:linear-gradient(180deg,transparent,rgba(0,0,0,.25));
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0,120 L0,70 L60,40 L110,72 L170,28 L230,66 L300,18 L360,60 L420,34 L480,68 L540,44 L600,74 L600,120 Z' fill='%23000'/%3E%3C/svg%3E") bottom/cover no-repeat;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0,120 L0,70 L60,40 L110,72 L170,28 L230,66 L300,18 L360,60 L420,34 L480,68 L540,44 L600,74 L600,120 Z' fill='%23000'/%3E%3C/svg%3E") bottom/cover no-repeat;}
+  .wrap{position:relative;z-index:1}
+
+  .eyebrow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 0 var(--accent);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}
+    70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+  .upd{margin-left:auto;text-transform:none;letter-spacing:0;font-size:12px}
+
+  .demo{background:rgba(227,165,60,.12);border:1px solid rgba(227,165,60,.4);
+    color:#F0C778;border-radius:10px;padding:9px 13px;font-size:12.5px;margin-bottom:16px;display:none}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;
+    padding:26px 24px;backdrop-filter:blur(6px);
+    box-shadow:0 1px 0 rgba(255,255,255,.05) inset, 0 18px 40px -28px rgba(0,0,0,.7)}
+
+  .badge{display:inline-flex;align-items:center;gap:8px;
+    font-family:"Space Grotesk";font-weight:700;font-size:12.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);
+    border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);
+    background:color-mix(in srgb,var(--accent) 12%,transparent);
+    padding:5px 11px;border-radius:999px}
+
+  .head{font-family:"Space Grotesk";font-weight:700;line-height:1.05;
+    font-size:clamp(28px,7vw,40px);margin:18px 0 6px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:15px}
+
+  .plates{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+  .plate{position:relative;min-width:58px;height:74px;display:grid;place-items:center;
+    font-family:"Space Grotesk";font-weight:700;font-size:38px;color:#10131A;
+    background:linear-gradient(180deg,#FBFCFE,#D8DCE3);
+    border-radius:10px;border:1px solid rgba(0,0,0,.25);
+    box-shadow:0 2px 0 rgba(0,0,0,.35),0 8px 18px -10px rgba(0,0,0,.6)}
+  .plate::before{content:"";position:absolute;inset:5px 5px auto 5px;height:18px;
+    border-radius:6px;background:linear-gradient(180deg,rgba(255,255,255,.85),transparent)}
+  .plate small{position:absolute;bottom:5px;font-family:Inter;font-weight:600;
+    font-size:8px;letter-spacing:.1em;color:#5A6473}
+
+  .meta{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);
+    display:grid;gap:8px;font-size:13.5px;color:var(--muted)}
+  .meta b{color:var(--txt);font-weight:600}
+  .meta a{color:var(--accent);text-decoration:none}
+  .meta a:hover,.meta a:focus{text-decoration:underline}
+
+  .hist{margin-top:30px}
+  .hist h2{font-family:"Space Grotesk";font-weight:500;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .row{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line);font-size:14px}
+  .row:last-child{border-bottom:0}
+  .row time{font-variant-numeric:tabular-nums;min-width:84px;color:var(--txt)}
+  .chip{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:6px;font-weight:600}
+  .chip.PRE{color:var(--pre);background:color-mix(in srgb,var(--pre) 14%,transparent)}
+  .chip.EMER{color:var(--emer);background:color-mix(in srgb,var(--emer) 14%,transparent)}
+  .row .d{margin-left:auto;font-family:"Space Grotesk";font-weight:700;letter-spacing:.05em}
+  .empty{color:var(--muted);font-size:13.5px;padding:8px 0}
+
+  .foot{margin-top:30px;font-size:11.5px;color:var(--muted);text-align:center;line-height:1.6}
+
+  @media(prefers-reduced-motion:reduce){.dot{animation:none}.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="ridge" aria-hidden="true"></div>
+<main class="wrap">
+  <div class="eyebrow">
+    <span class="dot" id="dot"></span> Restricción de carga · sello verde · RM
+    <span class="upd" id="upd">—</span>
+  </div>
+
+  <div class="demo" id="demo">Modo demo: datos de ejemplo. Cuando el cron publique <code>data/status.json</code>, verás la información real.</div>
+
+  <section class="card" id="card" data-state="clear" aria-live="polite">
+    <span class="badge" id="badge">Sin episodio</span>
+    <h1 class="head" id="head">Cargando…</h1>
+    <p class="sub" id="sub"></p>
+    <div class="plates" id="plates"></div>
+    <div class="meta" id="meta"></div>
+  </section>
+
+  <section class="hist">
+    <h2>Episodios recientes</h2>
+    <div id="hist"></div>
+  </section>
+
+  <p class="foot">Fuente oficial: Aire RM (Ministerio del Medio Ambiente).<br>Esto es un apoyo, no reemplaza verificar en la fuente antes de salir.</p>
+</main>
+
+<script>
+const MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const DIAS=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+
+const DEMO_STATUS={updated_at:new Date().toISOString(),restricted:true,level:"PREEMERGENCIA",
+  date:new Date(Date.now()+864e5).toISOString().slice(0,10),carga_sello_verde:"4-5",
+  link:"https://airerm.mma.gob.cl/noticias/"};
+const DEMO_HISTORY=[
+  {date:DEMO_STATUS.date,level:"PREEMERGENCIA",carga_sello_verde:"4-5"},
+  {date:"2026-06-13",level:"PREEMERGENCIA",carga_sello_verde:"8-9"},
+  {date:"2026-05-25",level:"EMERGENCIA",carga_sello_verde:"6-7"}
+];
+
+function relTime(iso){
+  const d=new Date(iso),s=(Date.now()-d)/1000;
+  if(s<90)return"hace instantes";
+  if(s<3600)return`hace ${Math.round(s/60)} min`;
+  if(s<86400)return`hace ${Math.round(s/3600)} h`;
+  return d.toLocaleDateString("es-CL");
+}
+function whenLabel(ymd){
+  if(!ymd)return"";
+  const [y,m,dd]=ymd.split("-").map(Number),dt=new Date(y,m-1,dd);
+  const today=new Date();today.setHours(0,0,0,0);
+  const diff=Math.round((dt-today)/864e5);
+  const txt=`${DIAS[dt.getDay()]} ${dd} de ${MESES[m-1]}`;
+  if(diff===0)return`hoy, ${txt}`;
+  if(diff===1)return`mañana, ${txt}`;
+  return txt;
+}
+
+function render(status,history,isDemo){
+  document.getElementById("demo").style.display=isDemo?"block":"none";
+  document.getElementById("upd").textContent="actualizado "+relTime(status.updated_at);
+
+  const card=document.getElementById("card");
+  const badge=document.getElementById("badge"),head=document.getElementById("head"),
+        sub=document.getElementById("sub"),plates=document.getElementById("plates"),
+        meta=document.getElementById("meta");
+  plates.innerHTML="";meta.innerHTML="";
+
+  if(status.restricted){
+    const st=status.level==="EMERGENCIA"?"emer":"pre";
+    card.dataset.state=st;
+    document.documentElement.style.setProperty("--accent",st==="emer"?"var(--emer)":"var(--pre)");
+    badge.textContent=status.level+" ambiental";
+    head.textContent="No circula "+whenLabel(status.date).split(",")[0];
+    sub.textContent="Carga con sello verde · patentes que terminan en:";
+    (status.carga_sello_verde||"").split("-").filter(Boolean).forEach(n=>{
+      const el=document.createElement("div");el.className="plate";
+      el.innerHTML=`${n}<small>BC·${n}${n}</small>`;plates.appendChild(el);
+    });
+    meta.innerHTML=
+      `<div><b>Cuándo:</b> ${whenLabel(status.date)}</div>`+
+      `<div><b>Horario:</b> 10:00–18:00 · interior Anillo Américo Vespucio</div>`+
+      `<div><a href="${status.link}" target="_blank" rel="noopener">Ver declaración oficial →</a></div>`;
+  }else{
+    card.dataset.state="clear";
+    document.documentElement.style.setProperty("--accent","var(--clear)");
+    badge.textContent=status.level?status.level+" ambiental":"Sin episodio";
+    head.textContent="Puedes circular";
+    sub.textContent="Hoy no hay restricción de carga con sello verde por episodio ambiental.";
+    meta.innerHTML=`<div><a href="${status.link}" target="_blank" rel="noopener">Ver portal Aire RM →</a></div>`;
+  }
+
+  const h=document.getElementById("hist");h.innerHTML="";
+  if(!history.length){h.innerHTML='<p class="empty">Sin episodios registrados aún.</p>';return;}
+  history.slice(0,10).forEach(e=>{
+    const [y,m,dd]=e.date.split("-").map(Number);
+    const cls=e.level==="EMERGENCIA"?"EMER":"PRE";
+    const row=document.createElement("div");row.className="row";
+    row.innerHTML=`<time>${String(dd).padStart(2,"0")}-${String(m).padStart(2,"0")}-${y}</time>`+
+      `<span class="chip ${cls}">${e.level}</span>`+
+      `<span class="d">${e.carga_sello_verde||"—"}</span>`;
+    h.appendChild(row);
+  });
+}
+
+async function load(){
+  try{
+    const [s,hh]=await Promise.all([
+      fetch("./data/status.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()}),
+      fetch("./data/history.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]).catch(()=>[])
+    ]);
+    render(s,hh,false);
+  }catch(e){
+    render(DEMO_STATUS,DEMO_HISTORY,true);
+  }
+}
+load();
+</script>
+</body>
+</html>
