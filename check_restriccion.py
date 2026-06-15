@@ -72,17 +72,36 @@ def detect_date(text: str, default_year: int) -> dt.date | None:
 
 
 def extract_carga_sello_verde(text: str) -> str | None:
-    """Digitos de carga CON sello verde, ej '4-5'; None si 'no hay' o ausente."""
+    """Digitos de carga CON sello verde, ej '2-3'; None si 'no hay' o ausente.
+
+    Soporta los dos formatos reales de airerm:
+      - Prosa:  '...Transporte de Carga Con Sello Verde ... que terminan en 2 y 3.'
+      - Tabla:  'Transporte de carga (incluye camionetas) ... Con Sello Verde: 4-5'
+    """
     low = text.lower()
+
+    # 1) Formato en prosa (el que usan las noticias de preemergencia).
+    m = re.search(r"transporte de carga con sello verde", low)
+    if m:
+        window = low[m.end(): m.end() + 300]
+        if "no hay" in window[:60]:
+            return None
+        m2 = re.search(r"termin[a-z]*\s+en\s+([0-9][0-9\s,yo\-]*)", window)
+        if m2:
+            digits = re.findall(r"\d", m2.group(1))
+            if digits:
+                return "-".join(digits)
+
+    # 2) Formato en tabla (bloque de carga, sin confundir con automoviles).
     idx = low.find("transporte de carga")
-    if idx == -1:
-        return None
-    chunk = low[idx: idx + 400]  # solo el bloque de carga (no el de automoviles)
-    m = re.search(r"con sello verde:\s*(no hay|[\d\-\s]+)", chunk)
-    if not m or "no hay" in m.group(1):
-        return None
-    digits = re.findall(r"\d", m.group(1))
-    return "-".join(digits) if digits else None
+    if idx != -1:
+        chunk = low[idx: idx + 400]
+        m3 = re.search(r"con sello verde:\s*(no hay|[\d\-\s]+)", chunk)
+        if m3 and "no hay" not in m3.group(1):
+            digits = re.findall(r"\d", m3.group(1))
+            if digits:
+                return "-".join(digits)
+    return None
 
 
 def parse_post(post: dict) -> dict:
