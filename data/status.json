@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-06-15T12:54:12-04:00",
-  "restricted": false,
+  "updated_at": "2026-06-15T13:30:41-04:00",
+  "restricted": true,
   "level": "PREEMERGENCIA",
   "date": "2026-06-15",
-  "carga_sello_verde": null,
+  "carga_sello_verde": "2-3",
   "link": "https://airerm.mma.gob.cl/para-este-lunes-15-de-junio-rige-preemergencia-ambiental-en-la-region-metropolitana/"
 }
