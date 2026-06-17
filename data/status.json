@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-06-16T11:12:22-04:00",
-  "restricted": false,
-  "level": "ALERTA",
-  "date": "2026-06-16",
-  "carga_sello_verde": null,
-  "link": "https://airerm.mma.gob.cl/alerta-ambiental-regira-este-martes-16-de-junio-en-la-region-metropolitana/"
+  "updated_at": "2026-06-17T00:04:06-04:00",
+  "restricted": true,
+  "level": "PREEMERGENCIA",
+  "date": "2026-06-17",
+  "carga_sello_verde": "4-5",
+  "link": "https://airerm.mma.gob.cl/se-declara-preemergencia-ambiental-para-este-miercoles-17-de-junio-en-la-region-metropolitana/"
 }
