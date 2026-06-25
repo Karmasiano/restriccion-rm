@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-06-24T08:21:16-04:00",
+  "updated_at": "2026-06-24T23:30:00-04:00",
   "restricted": false,
-  "level": null,
-  "date": null,
+  "level": "ALERTA",
+  "date": "2026-06-25",
   "carga_sello_verde": null,
-  "link": "https://airerm.mma.gob.cl/se-declara-preemergencia-ambiental-para-este-miercoles-17-de-junio-en-la-region-metropolitana/"
+  "link": "https://airerm.mma.gob.cl/declaran-alerta-ambiental-para-este-jueves-25-de-junio-en-la-region-metropolitana/"
 }
