@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-06-26T23:22:54-04:00",
+  "updated_at": "2026-06-27T07:37:03-04:00",
   "restricted": false,
-  "level": "ALERTA",
-  "date": "2026-06-26",
+  "level": null,
+  "date": null,
   "carga_sello_verde": null,
   "link": "https://airerm.mma.gob.cl/20216-2/"
 }
