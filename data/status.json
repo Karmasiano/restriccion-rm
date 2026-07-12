@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-07-11T08:29:30-04:00",
+  "updated_at": "2026-07-11T22:40:16-04:00",
   "restricted": false,
-  "level": null,
-  "date": null,
+  "level": "ALERTA",
+  "date": "2026-07-12",
   "carga_sello_verde": null,
-  "link": "https://airerm.mma.gob.cl/alerta-ambiental-tendra-este-viernes-10-de-julio-la-region-metropolitana/"
+  "link": "https://airerm.mma.gob.cl/para-este-domingo-12-de-julio-se-declara-alerta-ambiental-en-la-rm/"
 }
